@@ -2,8 +2,8 @@
 
 ## Deliverables
 
-- **Live link:** (fill after deploy)
-- **GitHub repo:** https://github.com/HamzaNaeem-404/AI-Insurance-Agent
+- **Live link:** https://hamzanaeem-404.github.io/AI-Insurance-Agent/
+- **GitHub repo:** https://github.com/HamzaNaeem-404/AI-Insurance-Agent (public so GitHub Pages works; make private after claiming a Vercel URL if needed)
 - **Unclear rules:** see below (also shown in the demo UI)
 
 ## Unclear rules (exact wording from Nick's doc)
@@ -23,7 +23,7 @@
 
 Hi Nick, I went ahead and built a small working piece of the underwriting flow using your intake questions and rules doc. It covers the hospitalization and depression cases from your video, so you can answer a few questions and see which carriers come out eligible and which rule decided it.
 
-Link: [demo link]
+Link: https://hamzanaeem-404.github.io/AI-Insurance-Agent/
 
 It's rough, but I thought clicking through it would tell you more than another video. While building it, I also noticed this wording under Royal Neighbors Hospitalization: "if not currently hospitalized or havent been hospitalized for 2 weeks total in the past 12 months: level 1st day product" — typos and the logic vs Guaranteed Issue aren't clear. That's exactly the kind of thing I'd want to confirm with you on day 1.
 

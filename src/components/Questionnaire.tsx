@@ -50,12 +50,12 @@ export function Questionnaire({ answers, onChange }: QuestionnaireProps) {
               {q.text}
             </label>
             {q.type === 'yes_no' && (
-              <div className="flex gap-2">
+              <div id={q.id} className="flex gap-2" role="group" aria-label={q.text}>
                 {[true, false].map((val) => (
                   <button
                     key={String(val)}
                     type="button"
-                    id={val ? q.id : undefined}
+                    aria-pressed={answers?.[q.id] === val}
                     onClick={() => setAnswer(q.id, val)}
                     className={`min-w-16 rounded-md border px-3 py-1.5 text-sm ${
                       answers?.[q.id] === val
