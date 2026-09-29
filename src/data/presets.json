@@ -1,0 +1,68 @@
+[
+  {
+    "id": "healthy",
+    "label": "Try: healthy client",
+    "answers": {
+      "tobacco": false,
+      "height_ft": 5,
+      "height_in": 6,
+      "weight": 150,
+      "hosp_recent": false,
+      "depression": false,
+      "heart_attack": false
+    },
+    "expected": {
+      "ethos-advantage": "Preferred",
+      "cica-superior": "Standard",
+      "baltimore-iprovid": "Preferred"
+    }
+  },
+  {
+    "id": "depression-hosp",
+    "label": "Try: depression + hospitalized 8 months ago",
+    "answers": {
+      "tobacco": false,
+      "height_ft": 5,
+      "height_in": 4,
+      "weight": 140,
+      "hosp_recent": true,
+      "hosp_currently": false,
+      "hosp_months_ago": 8,
+      "hosp_days": 6,
+      "hosp_times_2yr": true,
+      "hosp_reason": "Depression / mental health",
+      "depression": true,
+      "depression_on_meds": true,
+      "depression_med_compliant": true,
+      "depression_med_count": 1,
+      "depression_hosp": true,
+      "heart_attack": false
+    },
+    "expected": {
+      "ethos-advantage": "Decline",
+      "cica-superior": "Guaranteed",
+      "baltimore-iprovid": "Decline"
+    }
+  },
+  {
+    "id": "smoker-heart",
+    "label": "Try: smoker on heart medication",
+    "answers": {
+      "tobacco": true,
+      "height_ft": 5,
+      "height_in": 10,
+      "weight": 195,
+      "hosp_recent": false,
+      "depression": false,
+      "heart_attack": true,
+      "heart_attack_months_ago": 6,
+      "heart_attack_count": 1,
+      "heart_medication": true
+    },
+    "expected": {
+      "ethos-advantage": "Decline",
+      "cica-superior": "Standard",
+      "baltimore-iprovid": "Decline"
+    }
+  }
+]

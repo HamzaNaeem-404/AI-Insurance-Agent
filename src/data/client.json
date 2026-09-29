@@ -1,0 +1,12 @@
+{
+  "agentId": "AGT-DEMO-001",
+  "clientId": "CLT-DEMO-48291",
+  "name": "Margaret Ellis",
+  "dob": "1959-03-14",
+  "age": 67,
+  "state": "TX",
+  "gender": "Female",
+  "phone": "(512) 555-0142",
+  "email": "margaret.ellis@example.com",
+  "address": "1842 Oak Ridge Dr, Austin, TX 78745"
+}

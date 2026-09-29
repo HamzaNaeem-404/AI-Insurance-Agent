@@ -1,0 +1,126 @@
+[
+  {
+    "id": "tobacco",
+    "text": "Use tobacco?",
+    "type": "yes_no"
+  },
+  {
+    "id": "height_ft",
+    "text": "Height (feet)",
+    "type": "number",
+    "min": 4,
+    "max": 7
+  },
+  {
+    "id": "height_in",
+    "text": "Height (inches)",
+    "type": "number",
+    "min": 0,
+    "max": 11
+  },
+  {
+    "id": "weight",
+    "text": "Weight (lbs)",
+    "type": "number",
+    "min": 80,
+    "max": 400
+  },
+  {
+    "id": "hosp_recent",
+    "text": "Hospitalization — has the prospect been hospitalized?",
+    "type": "yes_no"
+  },
+  {
+    "id": "hosp_currently",
+    "text": "Is the prospect currently hospitalized?",
+    "type": "yes_no",
+    "showIf": { "field": "hosp_recent", "op": "eq", "value": true }
+  },
+  {
+    "id": "hosp_months_ago",
+    "text": "When was the most recent hospitalization? (months ago)",
+    "type": "number",
+    "min": 0,
+    "max": 120,
+    "showIf": { "field": "hosp_recent", "op": "eq", "value": true }
+  },
+  {
+    "id": "hosp_days",
+    "text": "How many days did the confinement last?",
+    "type": "number",
+    "min": 1,
+    "max": 90,
+    "showIf": { "field": "hosp_recent", "op": "eq", "value": true }
+  },
+  {
+    "id": "hosp_times_2yr",
+    "text": "Hospitalized two or more times in the last two years?",
+    "type": "yes_no",
+    "showIf": { "field": "hosp_recent", "op": "eq", "value": true }
+  },
+  {
+    "id": "hosp_reason",
+    "text": "What for?",
+    "type": "select",
+    "options": ["Depression / mental health", "Heart / cardiac", "Lung / respiratory", "Other"],
+    "showIf": { "field": "hosp_recent", "op": "eq", "value": true }
+  },
+  {
+    "id": "depression",
+    "text": "Ever treated for depression?",
+    "type": "yes_no"
+  },
+  {
+    "id": "depression_on_meds",
+    "text": "On medication for depression?",
+    "type": "yes_no",
+    "showIf": { "field": "depression", "op": "eq", "value": true }
+  },
+  {
+    "id": "depression_med_compliant",
+    "text": "Compliant with prescribed medications?",
+    "type": "yes_no",
+    "showIf": { "field": "depression_on_meds", "op": "eq", "value": true }
+  },
+  {
+    "id": "depression_med_count",
+    "text": "How many medications to treat this condition?",
+    "type": "number",
+    "min": 0,
+    "max": 10,
+    "showIf": { "field": "depression_on_meds", "op": "eq", "value": true }
+  },
+  {
+    "id": "depression_hosp",
+    "text": "Hospitalized for depression?",
+    "type": "yes_no",
+    "showIf": { "field": "depression", "op": "eq", "value": true }
+  },
+  {
+    "id": "heart_attack",
+    "text": "History of heart attack?",
+    "type": "yes_no"
+  },
+  {
+    "id": "heart_attack_months_ago",
+    "text": "How many months ago was the most recent heart attack?",
+    "type": "number",
+    "min": 0,
+    "max": 240,
+    "showIf": { "field": "heart_attack", "op": "eq", "value": true }
+  },
+  {
+    "id": "heart_attack_count",
+    "text": "How many heart attacks in lifetime?",
+    "type": "number",
+    "min": 1,
+    "max": 10,
+    "showIf": { "field": "heart_attack", "op": "eq", "value": true }
+  },
+  {
+    "id": "heart_medication",
+    "text": "Currently on heart medication?",
+    "type": "yes_no",
+    "showIf": { "field": "heart_attack", "op": "eq", "value": true }
+  }
+]

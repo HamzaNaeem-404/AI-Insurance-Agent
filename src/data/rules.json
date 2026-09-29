@@ -1,0 +1,494 @@
+[
+  {
+    "id": "ethos-hosp-current",
+    "carrier": "Ethos",
+    "product": "Advantage Whole Life + Estate Plan",
+    "productId": "ethos-advantage",
+    "condition": "Hospitalization",
+    "when": {
+      "all": [
+        { "field": "hosp_recent", "op": "eq", "value": true },
+        { "field": "hosp_currently", "op": "eq", "value": true }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Hospitalization — Ethos Advantage Whole Life + Estate Plan",
+      "text": "If currently hospitalized: Decline"
+    }
+  },
+  {
+    "id": "ethos-hosp-5days",
+    "carrier": "Ethos",
+    "product": "Advantage Whole Life + Estate Plan",
+    "productId": "ethos-advantage",
+    "condition": "Hospitalization",
+    "when": {
+      "all": [
+        { "field": "hosp_recent", "op": "eq", "value": true },
+        { "field": "hosp_days", "op": "gte", "value": 5 }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Hospitalization — Ethos Advantage Whole Life + Estate Plan",
+      "text": "If confinement lasted 5 or more days: Decline"
+    }
+  },
+  {
+    "id": "baltimore-hosp-current",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69",
+    "productId": "baltimore-iprovid",
+    "condition": "Hospitalization",
+    "when": {
+      "all": [
+        { "field": "hosp_recent", "op": "eq", "value": true },
+        { "field": "hosp_currently", "op": "eq", "value": true }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Hospitalization — Baltimore Life iProvide 45-69",
+      "text": "If currently hospitalized: Decline"
+    }
+  },
+  {
+    "id": "baltimore-hosp-5days",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69",
+    "productId": "baltimore-iprovid",
+    "condition": "Hospitalization",
+    "when": {
+      "all": [
+        { "field": "hosp_recent", "op": "eq", "value": true },
+        { "field": "hosp_days", "op": "gte", "value": 5 }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Hospitalization — Baltimore Life iProvide 45-69",
+      "text": "If confinement lasted 5 or more days: Decline"
+    }
+  },
+  {
+    "id": "cica-hosp-current",
+    "carrier": "Cica Life",
+    "product": "Superior Choice",
+    "productId": "cica-superior",
+    "condition": "Hospitalization",
+    "when": {
+      "all": [
+        { "field": "hosp_recent", "op": "eq", "value": true },
+        { "field": "hosp_currently", "op": "eq", "value": true }
+      ]
+    },
+    "outcome": "Guaranteed",
+    "source": {
+      "section": "Condition: Hospitalization — Cica Life Superior Choice",
+      "text": "If currently hospitalized: Guaranteed"
+    }
+  },
+  {
+    "id": "cica-hosp-2times",
+    "carrier": "Cica Life",
+    "product": "Superior Choice",
+    "productId": "cica-superior",
+    "condition": "Hospitalization",
+    "when": {
+      "all": [
+        { "field": "hosp_recent", "op": "eq", "value": true },
+        { "field": "hosp_times_2yr", "op": "eq", "value": true }
+      ]
+    },
+    "outcome": "Guaranteed",
+    "source": {
+      "section": "Condition: Hospitalization — Cica Life Superior Choice",
+      "text": "If confined 2 or more times in the past 2 years: Guaranteed"
+    }
+  },
+  {
+    "id": "ethos-depression-noncompliant",
+    "carrier": "Ethos",
+    "product": "Advantage Whole Life + Estate Plan",
+    "productId": "ethos-advantage",
+    "condition": "Depression",
+    "when": {
+      "all": [
+        { "field": "depression", "op": "eq", "value": true },
+        { "field": "depression_on_meds", "op": "eq", "value": true },
+        { "field": "depression_med_compliant", "op": "eq", "value": false }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Depression — Ethos Advantage Whole Life + Estate Plan",
+      "text": "If not compliant with prescribed medications: Decline"
+    }
+  },
+  {
+    "id": "ethos-depression-ok",
+    "carrier": "Ethos",
+    "product": "Advantage Whole Life + Estate Plan",
+    "productId": "ethos-advantage",
+    "condition": "Depression",
+    "when": {
+      "all": [
+        { "field": "depression", "op": "eq", "value": true },
+        {
+          "any": [
+            { "field": "depression_on_meds", "op": "eq", "value": false },
+            { "field": "depression_med_compliant", "op": "eq", "value": true }
+          ]
+        }
+      ]
+    },
+    "outcome": "Preferred",
+    "source": {
+      "section": "Condition: Depression — Ethos Advantage Whole Life + Estate Plan",
+      "text": "Otherwise Preferred"
+    }
+  },
+  {
+    "id": "baltimore-depression-noncompliant",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69",
+    "productId": "baltimore-iprovid",
+    "condition": "Depression",
+    "when": {
+      "all": [
+        { "field": "depression", "op": "eq", "value": true },
+        { "field": "depression_on_meds", "op": "eq", "value": true },
+        { "field": "depression_med_compliant", "op": "eq", "value": false }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Depression — Baltimore Life iProvide 45-69",
+      "text": "If not compliant with prescribed medications: Decline"
+    }
+  },
+  {
+    "id": "baltimore-depression-ok",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69",
+    "productId": "baltimore-iprovid",
+    "condition": "Depression",
+    "when": {
+      "all": [
+        { "field": "depression", "op": "eq", "value": true },
+        {
+          "any": [
+            { "field": "depression_on_meds", "op": "eq", "value": false },
+            { "field": "depression_med_compliant", "op": "eq", "value": true }
+          ]
+        }
+      ]
+    },
+    "outcome": "Preferred",
+    "source": {
+      "section": "Condition: Depression — Baltimore Life iProvide 45-69",
+      "text": "If not compliant with prescribed medications: Decline"
+    },
+    "reasonNote": "No non-compliance found; Baltimore lists only the decline condition for depression — treated as Preferred when compliant."
+  },
+  {
+    "id": "cica-depression-multi-med",
+    "carrier": "Cica Life",
+    "product": "Superior Choice",
+    "productId": "cica-superior",
+    "condition": "Depression",
+    "when": {
+      "all": [
+        { "field": "depression", "op": "eq", "value": true },
+        { "field": "depression_med_count", "op": "gt", "value": 1 }
+      ]
+    },
+    "outcome": "Guaranteed",
+    "source": {
+      "section": "Condition: Depression — Cica Life Superior Choice",
+      "text": "If taking more than 1 medication to treat this condition: Guaranteed"
+    }
+  },
+  {
+    "id": "cica-depression-standard",
+    "carrier": "Cica Life",
+    "product": "Superior Choice",
+    "productId": "cica-superior",
+    "condition": "Depression",
+    "when": {
+      "all": [
+        { "field": "depression", "op": "eq", "value": true },
+        {
+          "any": [
+            { "field": "depression_on_meds", "op": "eq", "value": false },
+            { "field": "depression_med_count", "op": "lte", "value": 1 }
+          ]
+        }
+      ]
+    },
+    "outcome": "Standard",
+    "source": {
+      "section": "Condition: Depression — Cica Life Superior Choice",
+      "text": "otherwise standard"
+    }
+  },
+  {
+    "id": "ethos-ha-0-12mo",
+    "carrier": "Ethos",
+    "product": "Advantage Whole Life + Estate Plan",
+    "productId": "ethos-advantage",
+    "condition": "Heart Attack",
+    "when": {
+      "all": [
+        { "field": "heart_attack", "op": "eq", "value": true },
+        { "field": "heart_attack_months_ago", "op": "lt", "value": 12 }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Heart Attack — Ethos Advantage Whole Life + Estate Plan",
+      "text": "0–1 year: Decline"
+    }
+  },
+  {
+    "id": "ethos-ha-multiple",
+    "carrier": "Ethos",
+    "product": "Advantage Whole Life + Estate Plan",
+    "productId": "ethos-advantage",
+    "condition": "Heart Attack",
+    "when": {
+      "all": [
+        { "field": "heart_attack", "op": "eq", "value": true },
+        { "field": "heart_attack_count", "op": "gt", "value": 1 }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Heart Attack — Ethos Advantage Whole Life + Estate Plan",
+      "text": "More than 1 heart attack in lifetime: Decline"
+    }
+  },
+  {
+    "id": "ethos-ha-tobacco",
+    "carrier": "Ethos",
+    "product": "Advantage Whole Life + Estate Plan",
+    "productId": "ethos-advantage",
+    "condition": "Heart Attack",
+    "when": {
+      "all": [
+        { "field": "heart_attack", "op": "eq", "value": true },
+        { "field": "tobacco", "op": "eq", "value": true }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Heart Attack — Ethos Advantage Whole Life + Estate Plan",
+      "text": "Tobacco + heart attack: Decline"
+    }
+  },
+  {
+    "id": "ethos-ha-ok",
+    "carrier": "Ethos",
+    "product": "Advantage Whole Life + Estate Plan",
+    "productId": "ethos-advantage",
+    "condition": "Heart Attack",
+    "when": {
+      "all": [
+        { "field": "heart_attack", "op": "eq", "value": true },
+        { "field": "heart_attack_months_ago", "op": "gte", "value": 12 },
+        { "field": "heart_attack_count", "op": "eq", "value": 1 },
+        { "field": "tobacco", "op": "eq", "value": false }
+      ]
+    },
+    "outcome": "Preferred",
+    "source": {
+      "section": "Condition: Heart Attack — Ethos Advantage Whole Life + Estate Plan",
+      "text": "otherwise preferred"
+    }
+  },
+  {
+    "id": "baltimore-ha-0-12mo",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69",
+    "productId": "baltimore-iprovid",
+    "condition": "Heart Attack",
+    "when": {
+      "all": [
+        { "field": "heart_attack", "op": "eq", "value": true },
+        { "field": "heart_attack_months_ago", "op": "lt", "value": 12 }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Heart Attack — Baltimore Life iProvide 45-69",
+      "text": "0–1 year: Decline"
+    }
+  },
+  {
+    "id": "baltimore-ha-12-24mo",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69",
+    "productId": "baltimore-iprovid",
+    "condition": "Heart Attack",
+    "when": {
+      "all": [
+        { "field": "heart_attack", "op": "eq", "value": true },
+        { "field": "heart_attack_months_ago", "op": "gte", "value": 12 },
+        { "field": "heart_attack_months_ago", "op": "lt", "value": 24 }
+      ]
+    },
+    "outcome": "Modified",
+    "source": {
+      "section": "Condition: Heart Attack — Baltimore Life iProvide 45-69",
+      "text": "1–2 years: Modified"
+    }
+  },
+  {
+    "id": "baltimore-ha-24-60mo",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69",
+    "productId": "baltimore-iprovid",
+    "condition": "Heart Attack",
+    "when": {
+      "all": [
+        { "field": "heart_attack", "op": "eq", "value": true },
+        { "field": "heart_attack_months_ago", "op": "gte", "value": 24 },
+        { "field": "heart_attack_months_ago", "op": "lt", "value": 60 }
+      ]
+    },
+    "outcome": "Standard",
+    "source": {
+      "section": "Condition: Heart Attack — Baltimore Life iProvide 45-69",
+      "text": "2–5 years: Standard"
+    }
+  },
+  {
+    "id": "baltimore-ha-tobacco",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69",
+    "productId": "baltimore-iprovid",
+    "condition": "Heart Attack",
+    "when": {
+      "all": [
+        { "field": "heart_attack", "op": "eq", "value": true },
+        { "field": "tobacco", "op": "eq", "value": true }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Heart Attack — Baltimore Life iProvide 45-69",
+      "text": "Tobacco + heart attack: Decline"
+    }
+  },
+  {
+    "id": "baltimore-ha-multiple",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69",
+    "productId": "baltimore-iprovid",
+    "condition": "Heart Attack",
+    "when": {
+      "all": [
+        { "field": "heart_attack", "op": "eq", "value": true },
+        { "field": "heart_attack_count", "op": "gt", "value": 1 }
+      ]
+    },
+    "outcome": "Decline",
+    "source": {
+      "section": "Condition: Heart Attack — Baltimore Life iProvide 45-69",
+      "text": "More than 1 heart attack in lifetime: Decline"
+    }
+  },
+  {
+    "id": "baltimore-ha-ok",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69",
+    "productId": "baltimore-iprovid",
+    "condition": "Heart Attack",
+    "when": {
+      "all": [
+        { "field": "heart_attack", "op": "eq", "value": true },
+        { "field": "heart_attack_months_ago", "op": "gte", "value": 60 },
+        { "field": "heart_attack_count", "op": "eq", "value": 1 },
+        { "field": "tobacco", "op": "eq", "value": false }
+      ]
+    },
+    "outcome": "Preferred",
+    "source": {
+      "section": "Condition: Heart Attack — Baltimore Life iProvide 45-69",
+      "text": "otherwise preferred"
+    }
+  },
+  {
+    "id": "cica-ha-standard",
+    "carrier": "Cica Life",
+    "product": "Superior Choice",
+    "productId": "cica-superior",
+    "condition": "Heart Attack",
+    "when": {
+      "all": [{ "field": "heart_attack", "op": "eq", "value": true }]
+    },
+    "outcome": "Standard",
+    "source": {
+      "section": "Condition: Heart Attack — Cica Life Superior Choice",
+      "text": "Standard"
+    }
+  },
+  {
+    "id": "ethos-baseline",
+    "carrier": "Ethos",
+    "product": "Advantage Whole Life + Estate Plan",
+    "productId": "ethos-advantage",
+    "condition": "Baseline",
+    "when": {
+      "all": [
+        { "field": "hosp_recent", "op": "eq", "value": false },
+        { "field": "depression", "op": "eq", "value": false },
+        { "field": "heart_attack", "op": "eq", "value": false }
+      ]
+    },
+    "outcome": "Preferred",
+    "source": {
+      "section": "No adverse underwriting conditions disclosed",
+      "text": "No matching adverse condition rules; default Preferred for healthy profile in this demo."
+    }
+  },
+  {
+    "id": "baltimore-baseline",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69",
+    "productId": "baltimore-iprovid",
+    "condition": "Baseline",
+    "when": {
+      "all": [
+        { "field": "hosp_recent", "op": "eq", "value": false },
+        { "field": "depression", "op": "eq", "value": false },
+        { "field": "heart_attack", "op": "eq", "value": false }
+      ]
+    },
+    "outcome": "Preferred",
+    "source": {
+      "section": "No adverse underwriting conditions disclosed",
+      "text": "No matching adverse condition rules; default Preferred for healthy profile in this demo."
+    }
+  },
+  {
+    "id": "cica-baseline",
+    "carrier": "Cica Life",
+    "product": "Superior Choice",
+    "productId": "cica-superior",
+    "condition": "Baseline",
+    "when": {
+      "all": [
+        { "field": "hosp_recent", "op": "eq", "value": false },
+        { "field": "depression", "op": "eq", "value": false },
+        { "field": "heart_attack", "op": "eq", "value": false }
+      ]
+    },
+    "outcome": "Standard",
+    "source": {
+      "section": "No adverse underwriting conditions disclosed",
+      "text": "No matching adverse condition rules; default Standard for healthy profile in this demo (Cica often rates Standard)."
+    }
+  }
+]

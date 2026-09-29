@@ -1,0 +1,17 @@
+[
+  {
+    "id": "ethos-advantage",
+    "carrier": "Ethos",
+    "product": "Advantage Whole Life + Estate Plan"
+  },
+  {
+    "id": "cica-superior",
+    "carrier": "Cica Life",
+    "product": "Superior Choice"
+  },
+  {
+    "id": "baltimore-iprovid",
+    "carrier": "Baltimore Life",
+    "product": "iProvide 45-69"
+  }
+]

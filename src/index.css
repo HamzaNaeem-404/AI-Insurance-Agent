@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #1a2332;
+  --muted: #5a6577;
+  --line: #d8dee8;
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --accent: #0d5c63;
+  --accent-soft: #e6f3f4;
+  --decline: #9b2c2c;
+  --decline-bg: #fde8e8;
+  --review: #92400e;
+  --review-bg: #fef3c7;
+  --ok: #276749;
+  --ok-bg: #e6ffed;
+  --guaranteed: #1e40af;
+  --guaranteed-bg: #dbeafe;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse 80% 50% at 10% -10%, #d4e8ea 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, #e8e4d9 0%, transparent 50%),
+    var(--bg);
+}
+
+h1, h2, h3 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}

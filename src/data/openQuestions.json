@@ -1,0 +1,20 @@
+[
+  {
+    "id": "royal-neighbors-hosp-wording",
+    "section": "Condition: Hospitalization — Royal Neighbors Ensured Legacy",
+    "exactWording": "if not currently hospitalized or havent been hospitalized for 2 weeks total in the past 12 months: level 1st day product",
+    "whyUnclear": "Typos (\"havent\") and ambiguous double-negative logic — unclear whether \"level 1st day product\" is Preferred/Level or a separate product tier, and how the OR combines with the Guaranteed Issue bullets above it."
+  },
+  {
+    "id": "depression-vs-hosp",
+    "section": "Condition: Depression vs Condition: Hospitalization",
+    "exactWording": "Depression block lists Preferred / medication compliance only; Hospitalization is a separate condition with its own carrier rules.",
+    "whyUnclear": "Nick's video walks through \"depression + hospitalized\" as one case, but the rules doc never ties psych hospitalization lookbacks to the Depression section. Unclear whether agents should apply both condition blocks independently or if depression-related hospitalization should use different lookbacks."
+  },
+  {
+    "id": "corebridge-diabetes-a1c",
+    "section": "Condition: Diabetes (No Complications) — Corebridge SIWL",
+    "exactWording": "If A1C is 8%–8.6%: SimpliNow Legacy Max. If A1C is less than 8%: SimpliNow Legacy Max. If A1C is not between 8.7%–9.9%: Decline. If A1C is 8.7%–9.9%: SimpliNow Legacy",
+    "whyUnclear": "Conflicting bands: A1C under 8% and 8–8.6% say Legacy Max, but \"If A1C is not between 8.7%–9.9%: Decline\" would also decline those same readings."
+  }
+]
