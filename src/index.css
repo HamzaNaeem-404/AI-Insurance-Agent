@@ -41,7 +41,14 @@ h1, h2, h3 {
   font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   font-weight: 600;
   letter-spacing: -0.01em;
+}
+
+h2, h3 {
   color: var(--navy);
+}
+
+.app-topbar h1 {
+  color: #ffffff;
 }
 
 .app-shell {
