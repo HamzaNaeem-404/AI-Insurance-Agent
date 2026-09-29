@@ -22,12 +22,16 @@ function childIdsOf(parentId: string, all: Question[]): string[] {
     .flatMap((q) => [q.id, ...childIdsOf(q.id, all)])
 }
 
+function isFollowUp(q: Question): boolean {
+  return Boolean(q?.showIf)
+}
+
 export function Questionnaire({ answers, onChange }: QuestionnaireProps) {
   const qs = questions as Question[]
+  const visible = qs.filter((q) => isVisible(q, answers))
 
   const setAnswer = (id: string, value: AnswerValue) => {
     const next: Answers = { ...answers, [id]: value }
-    // When parent becomes false/no, clear hidden children
     const q = qs.find((item) => item.id === id)
     if (q?.type === 'yes_no' && value === false) {
       for (const childId of childIdsOf(id, qs)) {
@@ -38,65 +42,73 @@ export function Questionnaire({ answers, onChange }: QuestionnaireProps) {
   }
 
   return (
-    <section className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4 sm:p-5">
-      <h2 className="mb-1 mt-0 text-lg">Health questions</h2>
-      <p className="mb-4 mt-0 text-sm text-[var(--muted)]">
-        From Nick&apos;s intake worksheet. Follow-ups appear only when needed.
-      </p>
-      <div className="flex flex-col gap-4">
-        {qs.filter((q) => isVisible(q, answers)).map((q) => (
-          <div key={q.id} className="border-t border-[var(--line)] pt-3 first:border-t-0 first:pt-0">
-            <label className="mb-2 block text-sm font-medium" htmlFor={q.id}>
+    <section className="panel overflow-hidden">
+      <div className="panel-header">
+        <h2 className="panel-title">Health intake</h2>
+        <span className="text-[0.6875rem] text-[var(--muted)]">
+          {visible.length} questions · follow-ups as needed
+        </span>
+      </div>
+      <div className="panel-body">
+        {visible.map((q) => (
+          <div
+            key={q.id}
+            className={`field-row ${isFollowUp(q) ? 'sm:pl-3 sm:border-l-2 sm:border-[var(--accent-soft)]' : ''}`}
+          >
+            <label className="text-sm font-medium text-[var(--ink)]" htmlFor={q.id}>
               {q.text}
+              {isFollowUp(q) ? (
+                <span className="ml-2 text-[0.6875rem] font-normal uppercase tracking-wide text-[var(--muted)]">
+                  Follow-up
+                </span>
+              ) : null}
             </label>
-            {q.type === 'yes_no' && (
-              <div id={q.id} className="flex gap-2" role="group" aria-label={q.text}>
-                {[true, false].map((val) => (
-                  <button
-                    key={String(val)}
-                    type="button"
-                    aria-pressed={answers?.[q.id] === val}
-                    onClick={() => setAnswer(q.id, val)}
-                    className={`min-w-16 rounded-md border px-3 py-1.5 text-sm ${
-                      answers?.[q.id] === val
-                        ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]'
-                        : 'border-[var(--line)] bg-white'
-                    }`}
-                  >
-                    {val ? 'Yes' : 'No'}
-                  </button>
-                ))}
-              </div>
-            )}
-            {q.type === 'number' && (
-              <input
-                id={q.id}
-                type="number"
-                min={q.min}
-                max={q.max}
-                value={typeof answers?.[q.id] === 'number' ? String(answers[q.id]) : ''}
-                onChange={(e) => {
-                  const raw = e.target.value
-                  setAnswer(q.id, raw === '' ? undefined : Number(raw))
-                }}
-                className="w-full max-w-xs rounded-md border border-[var(--line)] px-3 py-2 text-sm"
-              />
-            )}
-            {q.type === 'select' && (
-              <select
-                id={q.id}
-                value={typeof answers?.[q.id] === 'string' ? String(answers[q.id]) : ''}
-                onChange={(e) => setAnswer(q.id, e.target.value || undefined)}
-                className="w-full max-w-md rounded-md border border-[var(--line)] px-3 py-2 text-sm"
-              >
-                <option value="">Select…</option>
-                {(q.options ?? []).map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            )}
+            <div>
+              {q.type === 'yes_no' && (
+                <div id={q.id} className="inline-flex" role="group" aria-label={q.text}>
+                  {[true, false].map((val) => (
+                    <button
+                      key={String(val)}
+                      type="button"
+                      className="seg-btn"
+                      aria-pressed={answers?.[q.id] === val}
+                      onClick={() => setAnswer(q.id, val)}
+                    >
+                      {val ? 'Yes' : 'No'}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {q.type === 'number' && (
+                <input
+                  id={q.id}
+                  type="number"
+                  min={q.min}
+                  max={q.max}
+                  value={typeof answers?.[q.id] === 'number' ? String(answers[q.id]) : ''}
+                  onChange={(e) => {
+                    const raw = e.target.value
+                    setAnswer(q.id, raw === '' ? undefined : Number(raw))
+                  }}
+                  className="input-control"
+                />
+              )}
+              {q.type === 'select' && (
+                <select
+                  id={q.id}
+                  value={typeof answers?.[q.id] === 'string' ? String(answers[q.id]) : ''}
+                  onChange={(e) => setAnswer(q.id, e.target.value || undefined)}
+                  className="input-control max-w-md"
+                >
+                  <option value="">Select…</option>
+                  {(q.options ?? []).map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
           </div>
         ))}
       </div>

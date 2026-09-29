@@ -25,14 +25,14 @@ export function OverrideModal({
 }: OverrideModalProps) {
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(11,31,51,0.45)] p-4 sm:items-center"
       role="dialog"
       aria-modal="true"
       aria-labelledby="override-title"
       onClick={onClose}
     >
       <form
-        className="w-full max-w-md rounded-lg bg-white p-5 shadow-lg"
+        className="w-full max-w-md overflow-hidden rounded-md border border-[var(--line)] bg-white shadow-xl"
         onClick={(e) => e.stopPropagation()}
         onSubmit={(e) => {
           e.preventDefault()
@@ -43,49 +43,53 @@ export function OverrideModal({
           onSave(outcome, reason)
         }}
       >
-        <h3 id="override-title" className="mt-0 text-lg">
-          Override result
-        </h3>
-        <p className="text-sm text-[var(--muted)]">{productLabel}</p>
-        <label className="mt-3 block text-sm font-medium" htmlFor="override-outcome">
-          New status
-        </label>
-        <select
-          id="override-outcome"
-          name="outcome"
-          defaultValue={currentOutcome}
-          className="mt-1 w-full rounded-md border border-[var(--line)] px-3 py-2 text-sm"
-        >
-          {OUTCOMES.map((o) => (
-            <option key={o} value={o}>
-              {o}
-            </option>
-          ))}
-        </select>
-        <label className="mt-3 block text-sm font-medium" htmlFor="override-reason">
-          Reason for override <span className="text-[var(--decline)]">*</span>
-        </label>
-        <textarea
-          id="override-reason"
-          name="reason"
-          required
-          rows={3}
-          placeholder="Required — why is the agent changing this result?"
-          className="mt-1 w-full rounded-md border border-[var(--line)] px-3 py-2 text-sm"
-        />
-        <div className="mt-4 flex justify-end gap-2">
+        <div className="border-b border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
+          <h3 id="override-title" className="m-0 text-sm font-semibold uppercase tracking-wide text-[var(--navy)]">
+            Agent override
+          </h3>
+          <p className="mb-0 mt-1 text-sm text-[var(--muted)]">{productLabel}</p>
+        </div>
+        <div className="px-4 py-4">
+          <label className="block text-xs font-semibold uppercase tracking-wide text-[var(--muted)]" htmlFor="override-outcome">
+            New status
+          </label>
+          <select
+            id="override-outcome"
+            name="outcome"
+            defaultValue={currentOutcome}
+            className="input-control mt-1 max-w-none"
+          >
+            {OUTCOMES.map((o) => (
+              <option key={o} value={o}>
+                {o}
+              </option>
+            ))}
+          </select>
+          <label className="mt-3 block text-xs font-semibold uppercase tracking-wide text-[var(--muted)]" htmlFor="override-reason">
+            Reason required
+          </label>
+          <textarea
+            id="override-reason"
+            name="reason"
+            required
+            rows={3}
+            placeholder="Document why eligibility is being changed…"
+            className="input-control mt-1 max-w-none"
+          />
+        </div>
+        <div className="flex justify-end gap-2 border-t border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
           <button
             type="button"
             onClick={onClose}
-            className="rounded-md border border-[var(--line)] px-3 py-2 text-sm"
+            className="rounded border border-[var(--line-strong)] bg-white px-3 py-1.5 text-sm font-medium"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="rounded-md bg-[var(--accent)] px-3 py-2 text-sm text-white"
+            className="rounded border border-[var(--accent)] bg-[var(--accent)] px-3 py-1.5 text-sm font-medium text-white hover:bg-[var(--accent-hover)]"
           >
-            Apply override
+            Save override
           </button>
         </div>
       </form>

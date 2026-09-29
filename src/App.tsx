@@ -9,6 +9,7 @@ import type { Answers, Outcome, Rule, Product } from './engine/types'
 import rules from './data/rules.json'
 import products from './data/products.json'
 import presets from './data/presets.json'
+import client from './data/client.json'
 
 const typedRules = rules as Rule[]
 const typedProducts = products as Product[]
@@ -48,43 +49,71 @@ export default function App() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-6 sm:py-10">
-      <header className="mb-6">
-        <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
-          Nick Dale · Final expense underwriting
-        </p>
-        <h1 className="mb-2 mt-0 text-2xl sm:text-3xl">Underwriting rules demo</h1>
-        <p className="m-0 max-w-2xl text-sm text-[var(--muted)] sm:text-base">
-          Only the rules decide eligibility, and every result quotes its rule. No AI in this
-          demo — answers go through one pure function that reads his rules doc as data.
-        </p>
+    <div className="app-shell">
+      <header className="app-topbar">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+          <div className="min-w-0">
+            <div className="text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-white/65">
+              Final expense · Underwriting
+            </div>
+            <h1 className="m-0 text-base font-semibold text-white sm:text-lg">
+              Underwriting worksheet
+            </h1>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 text-xs text-white/80">
+            <span>
+              Agent <strong className="font-semibold text-white">{client?.agentId}</strong>
+            </span>
+            <span className="hidden h-3 w-px bg-white/25 sm:block" aria-hidden />
+            <span>
+              Client <strong className="font-semibold text-white">{client?.clientId}</strong>
+            </span>
+            <span className="rounded border border-white/25 bg-white/10 px-2 py-0.5 font-medium text-white">
+              Rules engine
+            </span>
+          </div>
+        </div>
       </header>
 
-      <div className="mb-4">
-        <PresetBar
-          activeId={activePreset}
-          onSelect={(id, presetAnswers) => {
-            setAnswers({ ...presetAnswers })
-            setActivePreset(id)
-            setOverrides({})
-          }}
-        />
-      </div>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-4 sm:py-6">
+        <p className="mb-4 mt-0 max-w-3xl text-sm text-[var(--muted)]">
+          Capture health answers and review carrier eligibility. Outcomes are determined only by
+          the underwriting rules — each result cites the deciding language from the rules document.
+        </p>
 
-      <div className="flex flex-col gap-4">
-        <ClientCard />
-        <Questionnaire answers={answers} onChange={handleAnswers} />
-        <ResultList
-          results={results}
-          overrides={overrides}
-          onOverride={handleOverride}
-        />
-        <OpenQuestions />
-      </div>
+        <div className="mb-4">
+          <PresetBar
+            activeId={activePreset}
+            onSelect={(id, presetAnswers) => {
+              setAnswers({ ...presetAnswers })
+              setActivePreset(id)
+              setOverrides({})
+            }}
+          />
+        </div>
 
-      <footer className="mt-8 border-t border-[var(--line)] pt-4 text-xs text-[var(--muted)]">
-        Demo only · fake client data · no login · robots noindex · rules from Nick&apos;s
-        underwriting document
+        <div className="grid gap-4 lg:grid-cols-12">
+          <div className="flex flex-col gap-4 lg:col-span-5">
+            <ClientCard />
+            <Questionnaire answers={answers} onChange={handleAnswers} />
+          </div>
+          <div className="flex flex-col gap-4 lg:col-span-7">
+            <ResultList
+              results={results}
+              overrides={overrides}
+              onOverride={handleOverride}
+            />
+            <OpenQuestions />
+          </div>
+        </div>
+      </main>
+
+      <footer className="border-t border-[var(--line)] bg-[var(--surface)]">
+        <div className="mx-auto flex max-w-6xl flex-wrap gap-x-4 gap-y-1 px-4 py-3 text-[0.6875rem] text-[var(--muted)]">
+          <span>Sample data only · PHI not stored</span>
+          <span>No AI eligibility decisions</span>
+          <span>Rules sourced from underwriting document</span>
+        </div>
       </footer>
     </div>
   )

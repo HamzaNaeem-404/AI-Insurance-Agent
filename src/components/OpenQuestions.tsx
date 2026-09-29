@@ -2,24 +2,29 @@ import openQuestions from '../data/openQuestions.json'
 
 export function OpenQuestions() {
   return (
-    <section className="rounded-lg border border-dashed border-[var(--review)] bg-[var(--review-bg)]/40 p-4 sm:p-5">
-      <h2 className="mb-1 mt-0 text-lg">Unclear rules we noticed</h2>
-      <p className="mb-4 mt-0 text-sm text-[var(--muted)]">
-        Exact wording from Nick&apos;s underwriting doc — for day-1 clarification.
-      </p>
-      <ul className="m-0 flex list-none flex-col gap-3 p-0">
-        {(openQuestions ?? []).map((q) => (
-          <li key={q.id} className="rounded-md bg-white/80 p-3 text-sm">
-            <div className="text-xs font-semibold uppercase tracking-wide text-[var(--review)]">
-              {q.section}
+    <section className="panel overflow-hidden">
+      <div className="panel-header">
+        <h2 className="panel-title">Rules clarification</h2>
+        <span className="text-[0.6875rem] text-[var(--muted)]">
+          Flagged for underwriter review
+        </span>
+      </div>
+      <div className="divide-y divide-[var(--line)]">
+        {(openQuestions ?? []).map((q, index) => (
+          <div key={q.id} className="px-4 py-3 text-sm">
+            <div className="flex flex-wrap items-baseline gap-2">
+              <span className="text-[0.6875rem] font-bold text-[var(--review)]">
+                #{index + 1}
+              </span>
+              <span className="text-xs font-semibold text-[var(--navy)]">{q.section}</span>
             </div>
-            <blockquote className="my-2 border-l-2 border-[var(--review)] pl-3 italic">
+            <blockquote className="my-2 border-l-2 border-[var(--line-strong)] pl-3 text-[var(--ink)]">
               &ldquo;{q.exactWording}&rdquo;
             </blockquote>
-            <p className="m-0 text-[var(--muted)]">{q.whyUnclear}</p>
-          </li>
+            <p className="m-0 text-xs leading-relaxed text-[var(--muted)]">{q.whyUnclear}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
   )
 }

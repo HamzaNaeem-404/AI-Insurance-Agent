@@ -22,89 +22,113 @@ function badgeStyles(outcome: Outcome): { bg: string; color: string } {
   return { bg: 'var(--ok-bg)', color: 'var(--ok)' }
 }
 
+function rowTone(outcome: Outcome): string {
+  if (outcome === 'Decline') return 'is-decline'
+  if (outcome === 'needs_review') return 'is-review'
+  if (outcome === 'Guaranteed' || outcome === 'Guaranteed Issue') return 'is-guaranteed'
+  return 'is-ok'
+}
+
 export function ResultList({ results, overrides, onOverride }: ResultListProps) {
   const [openWhy, setOpenWhy] = useState<string | null>(null)
   const [overrideTarget, setOverrideTarget] = useState<Result | null>(null)
 
+  const declineCount = (results ?? []).filter((r) => {
+    const o = overrides?.[r.productId]?.outcome ?? r.outcome
+    return o === 'Decline'
+  }).length
+
   return (
-    <section className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4 sm:p-5">
-      <h2 className="mb-1 mt-0 text-lg">Carrier results</h2>
-      <p className="mb-4 mt-0 text-sm text-[var(--muted)]">
-        Eligibility comes only from the rules — every result quotes the deciding sentence.
-      </p>
-      <ul className="m-0 flex list-none flex-col gap-3 p-0">
+    <section className="panel overflow-hidden">
+      <div className="panel-header">
+        <h2 className="panel-title">Carrier eligibility</h2>
+        <span className="text-[0.6875rem] text-[var(--muted)]">
+          {results?.length ?? 0} products · {declineCount} declined · rules only
+        </span>
+      </div>
+      <div>
         {(results ?? []).map((r) => {
           const override = overrides?.[r.productId]
           const outcome = override?.outcome ?? r.outcome
           const styles = badgeStyles(outcome)
           const whyOpen = openWhy === r.productId
           return (
-            <li
+            <article
               key={r.productId}
-              className="rounded-md border border-[var(--line)] p-3 sm:p-4"
+              className={`eligibility-row ${rowTone(outcome)}`}
             >
               <div className="flex flex-wrap items-start justify-between gap-2">
-                <div>
-                  <div className="font-medium">
-                    {r.carrier}{' '}
-                    <span className="font-normal text-[var(--muted)]">{r.product}</span>
-                  </div>
+                <div className="min-w-0">
+                  <div className="font-semibold text-[var(--navy)]">{r.carrier}</div>
+                  <div className="text-sm text-[var(--muted)]">{r.product}</div>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
                   <span
-                    className="mt-1 inline-block rounded px-2 py-0.5 text-xs font-semibold"
+                    className="status-pill"
                     style={{ background: styles.bg, color: styles.color }}
                   >
                     {outcome}
                   </span>
                   {override ? (
-                    <span className="ml-2 inline-block rounded bg-[var(--review-bg)] px-2 py-0.5 text-xs text-[var(--review)]">
-                      Overridden by agent
+                    <span className="status-pill bg-[var(--review-bg)] text-[var(--review)]">
+                      Agent override
                     </span>
                   ) : null}
+                  <button
+                    type="button"
+                    className="rounded border border-[var(--line-strong)] bg-white px-2.5 py-1 text-xs font-medium text-[var(--ink)] hover:bg-[var(--surface-2)]"
+                    onClick={() => setOverrideTarget(r)}
+                  >
+                    Override
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  className="rounded-md border border-[var(--line)] px-2.5 py-1 text-xs"
-                  onClick={() => setOverrideTarget(r)}
-                >
-                  Override
-                </button>
               </div>
-              <p className="mb-1 mt-2 text-sm">
-                {override
-                  ? `Override reason: ${override.reason}`
-                  : r.reason}
+
+              <p className="m-0 text-sm text-[var(--ink)]">
+                {override ? `Override reason: ${override.reason}` : r.reason}
               </p>
+
               {!override && r.matchedRules?.[0]?.source?.text ? (
-                <blockquote className="m-0 border-l-2 border-[var(--accent)] pl-3 text-sm italic text-[var(--muted)]">
-                  &ldquo;{r.matchedRules[0].source.text}&rdquo;
-                  <footer className="mt-1 not-italic text-xs">
-                    — {r.matchedRules[0].source.section}
-                  </footer>
-                </blockquote>
+                <div className="rounded border border-[var(--line)] bg-white/80 px-3 py-2 text-sm">
+                  <div className="text-[0.6875rem] font-semibold uppercase tracking-wide text-[var(--muted)]">
+                    Applicable rule
+                  </div>
+                  <p className="mb-1 mt-1 text-[var(--ink)]">
+                    &ldquo;{r.matchedRules[0].source.text}&rdquo;
+                  </p>
+                  <p className="m-0 text-xs text-[var(--muted)]">
+                    {r.matchedRules[0].source.section}
+                  </p>
+                </div>
               ) : null}
+
               {(r.matchedRules?.length ?? 0) > 0 && (
-                <button
-                  type="button"
-                  className="mt-2 text-xs text-[var(--accent)] underline"
-                  onClick={() => setOpenWhy(whyOpen ? null : r.productId)}
-                >
-                  {whyOpen ? 'Hide why' : 'Why (rule trace)'}
-                </button>
+                <div>
+                  <button
+                    type="button"
+                    className="text-xs font-medium text-[var(--accent)] hover:underline"
+                    onClick={() => setOpenWhy(whyOpen ? null : r.productId)}
+                  >
+                    {whyOpen ? 'Hide rule trace' : 'View full rule trace'}
+                  </button>
+                  {whyOpen ? (
+                    <ol className="mb-0 mt-2 list-decimal pl-5 text-xs text-[var(--muted)]">
+                      {(r.matchedRules ?? []).map((m) => (
+                        <li key={m.ruleId} className="mb-1">
+                          <strong className="text-[var(--ink)]">{m.outcome}</strong>
+                          {' — '}
+                          {m.source?.text}{' '}
+                          <span className="opacity-70">({m.condition})</span>
+                        </li>
+                      ))}
+                    </ol>
+                  ) : null}
+                </div>
               )}
-              {whyOpen && (
-                <ol className="mt-2 list-decimal pl-5 text-xs text-[var(--muted)]">
-                  {(r.matchedRules ?? []).map((m) => (
-                    <li key={m.ruleId} className="mb-1">
-                      <strong>{m.outcome}</strong> — {m.source?.text}{' '}
-                      <span className="opacity-70">({m.condition})</span>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </li>
+            </article>
           )
         })}
-      </ul>
+      </div>
 
       {overrideTarget ? (
         <OverrideModal

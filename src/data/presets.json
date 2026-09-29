@@ -1,7 +1,8 @@
 [
   {
     "id": "healthy",
-    "label": "Try: healthy client",
+    "label": "Healthy profile",
+    "shortLabel": "Healthy",
     "answers": {
       "tobacco": false,
       "height_ft": 5,
@@ -19,7 +20,8 @@
   },
   {
     "id": "depression-hosp",
-    "label": "Try: depression + hospitalized 8 months ago",
+    "label": "Depression + hospitalization",
+    "shortLabel": "Depression / hosp.",
     "answers": {
       "tobacco": false,
       "height_ft": 5,
@@ -46,7 +48,8 @@
   },
   {
     "id": "smoker-heart",
-    "label": "Try: smoker on heart medication",
+    "label": "Tobacco + heart attack",
+    "shortLabel": "Tobacco / cardiac",
     "answers": {
       "tobacco": true,
       "height_ft": 5,
